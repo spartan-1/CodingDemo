@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import au.com.pnr.codingdemo.R;
 import au.com.pnr.codingdemo.base.BaseActivity;
 import au.com.pnr.codingdemo.ui.screens.countryinfo.fragments.CountryInfoListFragment;
+import au.com.pnr.codingdemo.util.AppConstants;
 import timber.log.Timber;
 
 /**
@@ -17,16 +18,22 @@ public class CountryInfoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         Timber.d(" onCreate ");
         setContentView(R.layout.activity_country_info);
+        displayCountryInfoFeed(savedInstanceState);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         Timber.d(" onResume ");
-        displayCountryInfoFeed();
     }
 
-    private void displayCountryInfoFeed() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_layout, CountryInfoListFragment.newInstance()).commit();
+    private void displayCountryInfoFeed(Bundle savedInstanceState) {
+        if (findViewById(R.id.content_layout) != null) {
+            CountryInfoListFragment countryInfoListFragment;
+            if (savedInstanceState == null) {
+                countryInfoListFragment = new CountryInfoListFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_layout, countryInfoListFragment, AppConstants.COUNTRYINFO_FRAGMENT_TAG_STRING).commit();
+            }
+        }
     }
 }

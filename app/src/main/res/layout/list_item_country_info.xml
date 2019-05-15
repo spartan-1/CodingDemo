@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.text.TextUtils" />
+
         <variable
                 name="countryInfo"
                 type="au.com.pnr.codingdemo.model.InformationData"/>
@@ -50,10 +52,11 @@
                     style="@style/Text.Large.Accent"
                     android:layout_width="@dimen/dimen_0"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/iv_right_arrow"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="@{countryInfo.title}"
+                    android:text="@{TextUtils.isEmpty(countryInfo.title) ? @string/title_not_available : countryInfo.title}"
                     tools:text="Title"/>
 
             <!--Image corresponding to info-->
@@ -62,10 +65,10 @@
                     android:layout_width="@dimen/dimen_0"
                     android:layout_height="wrap_content"
                     android:contentDescription="@null"
+                    android:layout_margin="@dimen/dimen_common_margin"
                     app:layout_constraintStart_toStartOf="@id/guideline_image"
                     app:layout_constraintTop_toBottomOf="@id/text_title"
-                    android:layout_margin="@dimen/dimen_common_margin"
-                    android:background="@android:drawable/ic_menu_gallery"
+                    app:imageUrl="@{countryInfo.imageHref}"
                     app:layout_constraintEnd_toStartOf="@id/iv_right_arrow"
                     tools:srcCompat="@drawable/ic_launcher_foreground"/>
 
@@ -82,10 +85,11 @@
                     style="@style/Text"
                     android:layout_width="@dimen/dimen_0"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/barrier_image"
                     app:layout_constraintTop_toBottomOf="@id/text_title"
-                    android:text="@{countryInfo.description}"
+                    android:text="@{TextUtils.isEmpty(countryInfo.description) ? @string/description_not_available : countryInfo.description}"
                     tools:text="Description"/>
 
             <androidx.constraintlayout.widget.Barrier
