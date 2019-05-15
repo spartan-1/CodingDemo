@@ -2,10 +2,13 @@ package au.com.pnr.codingdemo.ui.screens.countryinfo.activities;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import au.com.pnr.codingdemo.R;
 import au.com.pnr.codingdemo.base.BaseActivity;
 import au.com.pnr.codingdemo.ui.screens.countryinfo.fragments.CountryInfoListFragment;
 import au.com.pnr.codingdemo.util.AppConstants;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import timber.log.Timber;
 
 /**
@@ -13,11 +16,16 @@ import timber.log.Timber;
  */
 public class CountryInfoActivity extends BaseActivity {
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Timber.d(" onCreate ");
         setContentView(R.layout.activity_country_info);
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         displayCountryInfoFeed(savedInstanceState);
     }
 
