@@ -14,4 +14,19 @@ public class Constants {
      * The constant INFO_FEED.
      */
     public static final String INFO_FEED = "s/2iodh4vg0eortkl/facts.json";
+
+    /**
+     * The constant API_CONNECT_TIMEOUT_IN_SECONDS.
+     */
+    public static final int API_CONNECT_TIMEOUT_IN_SECONDS = 30;
+
+    /**
+     * The constant API_READ_TIMEOUT_IN_SECONDS.
+     */
+    public static final int API_READ_TIMEOUT_IN_SECONDS = 30;
+
+    /**
+     * The constant API_WRITE_TIMEOUT_IN_SECONDS.
+     */
+    public static final int API_WRITE_TIMEOUT_IN_SECONDS = 30;
 }

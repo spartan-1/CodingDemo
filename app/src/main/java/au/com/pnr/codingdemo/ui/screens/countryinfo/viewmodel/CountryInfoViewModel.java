@@ -1,6 +1,7 @@
 package au.com.pnr.codingdemo.ui.screens.countryinfo.viewmodel;
 
 import android.app.Application;
+import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -12,6 +13,9 @@ import au.com.pnr.codingdemo.util.NetworkUtil;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * The type Country info view model.
@@ -34,13 +38,14 @@ public class CountryInfoViewModel extends AndroidViewModel {
      * @return the country info
      */
     public LiveData<CountryInfo> getCountryInfo() {
-        if (!NetworkUtil.isOnline(getApplication())) {
-
-        }
         if (countryInfoMutableLiveData == null) {
             countryInfoMutableLiveData = new MutableLiveData<>();
-            loadCountryInformation();
         }
+        if (!NetworkUtil.isOnline(getApplication())) {
+            clearData();
+            return countryInfoMutableLiveData;
+        }
+        loadCountryInformation();
         return countryInfoMutableLiveData;
     }
 
@@ -50,12 +55,18 @@ public class CountryInfoViewModel extends AndroidViewModel {
         call.enqueue(new Callback<CountryInfo>() {
             @Override
             public void onResponse(@NonNull Call<CountryInfo> call, @NonNull Response<CountryInfo> response) {
-                countryInfoMutableLiveData.setValue(response.body());
+                //additional safe check
+                if (response.body() != null) {
+                    Objects.requireNonNull(Objects.requireNonNull(response.body()).getRows()).removeIf(x -> (TextUtils.isEmpty(x.getTitle()) && TextUtils.isEmpty(x.getDescription()) && TextUtils.isEmpty(x.getImageHref())));
+                    countryInfoMutableLiveData.setValue(response.body());
+                } else {
+                    clearData();
+                }
             }
 
             @Override
             public void onFailure(@NonNull Call<CountryInfo> call, @NonNull Throwable t) {
-                countryInfoMutableLiveData.setValue(null);
+                clearData();
             }
         });
     }
@@ -63,8 +74,11 @@ public class CountryInfoViewModel extends AndroidViewModel {
     /**
      * Clear data.
      */
-    public void clearData() {
-        countryInfoMutableLiveData = null;
+    private void clearData() {
+        if (countryInfoMutableLiveData != null) {
+            //clearing the livedata to hold empty data
+            countryInfoMutableLiveData.setValue(new CountryInfo("", new ArrayList<>()));
+        }
     }
 
 }

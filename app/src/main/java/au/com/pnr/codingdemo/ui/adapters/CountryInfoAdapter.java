@@ -52,4 +52,20 @@ public class CountryInfoAdapter extends RecyclerView.Adapter<InformationViewHold
     public int getItemCount() {
         return informationDataList.size();
     }
+
+    /**
+     * Update data.
+     *
+     * @param informationDataList the information data list
+     */
+    public void updateData(List<InformationData> informationDataList) {
+        this.informationDataList.clear();
+        this.informationDataList.addAll(informationDataList);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 }
