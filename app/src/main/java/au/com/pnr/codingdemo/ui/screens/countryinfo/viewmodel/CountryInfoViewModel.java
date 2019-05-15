@@ -66,6 +66,7 @@ public class CountryInfoViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NonNull Call<CountryInfo> call, @NonNull Throwable t) {
+                NetworkUtil.displayServerErrorMessages(getApplication());
                 clearData();
             }
         });

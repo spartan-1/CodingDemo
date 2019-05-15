@@ -8,7 +8,7 @@ public class Constants {
     /**
      * The constant BASE_URL.
      */
-    public static final String BASE_URL = "https://dl.dropboxusercontent.com/";
+    public static String BASE_URL = "https://dl.dropboxusercontent.com/";
 
     /**
      * The constant INFO_FEED.
@@ -29,4 +29,8 @@ public class Constants {
      * The constant API_WRITE_TIMEOUT_IN_SECONDS.
      */
     public static final int API_WRITE_TIMEOUT_IN_SECONDS = 30;
+
+    public static final int HTTP_OK = 200;
+
+    public static final int HTTP_NOT_FOUND = 404;
 }
