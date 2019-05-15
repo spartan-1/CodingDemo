@@ -7,7 +7,7 @@
         android:layout_height="match_parent">
     <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
         <!--Recyclerview to display the country info-->
-        <androidx.recyclerview.widget.RecyclerView
+        <au.com.pnr.codingdemo.util.customviews.CustomRecyclerView
                 android:id="@+id/rv_country_info"
                 android:padding="@dimen/recycler_view_padding"
                 android:clipToPadding="false"

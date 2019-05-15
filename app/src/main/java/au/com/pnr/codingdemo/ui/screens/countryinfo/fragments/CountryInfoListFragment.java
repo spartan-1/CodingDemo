@@ -1,6 +1,7 @@
 package au.com.pnr.codingdemo.ui.screens.countryinfo.fragments;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,11 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import au.com.pnr.codingdemo.R;
 import au.com.pnr.codingdemo.base.BaseFragment;
@@ -20,6 +21,7 @@ import au.com.pnr.codingdemo.model.CountryInfo;
 import au.com.pnr.codingdemo.ui.adapters.CountryInfoAdapter;
 import au.com.pnr.codingdemo.ui.screens.countryinfo.viewmodel.CountryInfoViewModel;
 import au.com.pnr.codingdemo.util.NetworkUtil;
+import au.com.pnr.codingdemo.util.customviews.CustomRecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
@@ -36,7 +38,7 @@ public class CountryInfoListFragment extends BaseFragment {
      * The Recycler view.
      */
     @BindView(R.id.rv_country_info)
-    RecyclerView recyclerView;
+    CustomRecyclerView recyclerView;
 
     /**
      * The M refresh feed.
@@ -65,20 +67,15 @@ public class CountryInfoListFragment extends BaseFragment {
         countryInfoAdapter.notifyDataSetChanged();
         if (countryInfo.getRows() != null && countryInfo.getRows().size() > 0) {
             countryInfoAdapter.updateData(countryInfo.getRows());
+            if (getActivity() != null && (((AppCompatActivity) getActivity()).getSupportActionBar()) != null && !(TextUtils.isEmpty(countryInfo.getTitle()))) {
+                (((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(countryInfo.getTitle());
+            }
             showDataView();
         } else {
             handleDataError();
         }
     };
 
-    /**
-     * New instance country info list fragment.
-     *
-     * @return the country info list fragment
-     */
-    public static CountryInfoListFragment newInstance() {
-        return new CountryInfoListFragment();
-    }
 
     private void initRecyclerView() {
         countryInfoAdapter = new CountryInfoAdapter(new ArrayList<>());
