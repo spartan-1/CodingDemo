@@ -1,7 +1,6 @@
 package au.com.pnr.codingdemo.ui.screens.countryinfo.fragments;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,6 @@ import au.com.pnr.codingdemo.util.NetworkUtil;
 import au.com.pnr.codingdemo.util.customviews.CustomRecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -64,12 +62,9 @@ public class CountryInfoListFragment extends BaseFragment {
 
     private Observer<CountryInfo> infoObserver = countryInfo -> {
         mRefreshFeed.setRefreshing(false);
-        countryInfoAdapter.notifyDataSetChanged();
         if (countryInfo.getRows() != null && countryInfo.getRows().size() > 0) {
             countryInfoAdapter.updateData(countryInfo.getRows());
-            if (getActivity() != null && (((AppCompatActivity) getActivity()).getSupportActionBar()) != null && !(TextUtils.isEmpty(countryInfo.getTitle()))) {
-                (((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(countryInfo.getTitle());
-            }
+            (Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())).setTitle(countryInfo.getTitle());
             showDataView();
         } else {
             handleDataError();
@@ -101,27 +96,22 @@ public class CountryInfoListFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_country_info_list, container, false);
-        Timber.d(" onCreateView ");
         ButterKnife.bind(this, view);
         countryInfoViewModel = ViewModelProviders.of(this).get(CountryInfoViewModel.class);
         initRecyclerView();
         showProgressView();
-        if (getActivity() != null) {
-            countryInfoViewModel.getCountryInfo().observe(getActivity(), infoObserver);
-        }
+        countryInfoViewModel.getCountryInfo().observe(Objects.requireNonNull(getActivity()), infoObserver);
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Timber.d(" onResume ");
         mRefreshFeed.setOnRefreshListener(() -> countryInfoViewModel.getCountryInfo());
     }
 
     @Override
     public void onDestroyView() {
-        Timber.d(" onDestroyView ");
         super.onDestroyView();
     }
 

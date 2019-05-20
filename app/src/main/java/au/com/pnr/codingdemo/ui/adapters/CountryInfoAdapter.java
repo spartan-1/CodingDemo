@@ -11,7 +11,6 @@ import au.com.pnr.codingdemo.R;
 import au.com.pnr.codingdemo.databinding.ListItemCountryInfoBinding;
 import au.com.pnr.codingdemo.model.InformationData;
 import au.com.pnr.codingdemo.ui.viewholders.InformationViewHolder;
-import timber.log.Timber;
 
 import java.util.List;
 
@@ -34,7 +33,6 @@ public class CountryInfoAdapter extends RecyclerView.Adapter<InformationViewHold
     @NonNull
     @Override
     public InformationViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        Timber.d(" onCreateViewHolder ");
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
         ListItemCountryInfoBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.list_item_country_info, viewGroup, false);
         return new InformationViewHolder(binding);
@@ -42,7 +40,6 @@ public class CountryInfoAdapter extends RecyclerView.Adapter<InformationViewHold
 
     @Override
     public void onBindViewHolder(@NonNull InformationViewHolder informationViewHolder, int i) {
-        Timber.d(" onBindViewHolder ");
         informationViewHolder.getBinding().setVariable(BR.countryInfo, informationDataList.get(i));
         ListItemCountryInfoBinding viewBinding = (ListItemCountryInfoBinding) informationViewHolder.getBinding();
         viewBinding.executePendingBindings();
