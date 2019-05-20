@@ -13,6 +13,7 @@ import au.com.pnr.codingdemo.util.NetworkUtil;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -67,6 +68,7 @@ public class CountryInfoViewModel extends AndroidViewModel {
             @Override
             public void onFailure(@NonNull Call<CountryInfo> call, @NonNull Throwable t) {
                 NetworkUtil.displayServerErrorMessages(getApplication());
+                Timber.d("Network call failure");
                 clearData();
             }
         });
@@ -78,6 +80,7 @@ public class CountryInfoViewModel extends AndroidViewModel {
     private void clearData() {
         if (countryInfoMutableLiveData != null) {
             //clearing the livedata to hold empty data
+            Timber.d("Clearing data");
             countryInfoMutableLiveData.setValue(new CountryInfo("", new ArrayList<>()));
         }
     }
