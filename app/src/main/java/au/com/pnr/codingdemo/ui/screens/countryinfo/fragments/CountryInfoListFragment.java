@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +18,6 @@ import au.com.pnr.codingdemo.base.BaseFragment;
 import au.com.pnr.codingdemo.model.CountryInfo;
 import au.com.pnr.codingdemo.ui.adapters.CountryInfoAdapter;
 import au.com.pnr.codingdemo.ui.screens.countryinfo.viewmodel.CountryInfoViewModel;
-import au.com.pnr.codingdemo.util.NetworkUtil;
 import au.com.pnr.codingdemo.util.customviews.CustomRecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,6 +58,7 @@ public class CountryInfoListFragment extends BaseFragment {
 
     private CountryInfoAdapter countryInfoAdapter;
 
+
     private Observer<CountryInfo> infoObserver = countryInfo -> {
         mRefreshFeed.setRefreshing(false);
         if (countryInfo.getRows() != null && countryInfo.getRows().size() > 0) {
@@ -81,9 +80,6 @@ public class CountryInfoListFragment extends BaseFragment {
     }
 
     private void handleDataError() {
-        if (!NetworkUtil.isOnline(Objects.requireNonNull(getContext()))) {
-            Toast.makeText(getContext(), R.string.error_data_loading, Toast.LENGTH_SHORT).show();
-        }
         showErrorView();
     }
 

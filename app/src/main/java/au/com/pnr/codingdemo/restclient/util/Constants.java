@@ -30,7 +30,13 @@ public class Constants {
      */
     public static final int API_WRITE_TIMEOUT_IN_SECONDS = 30;
 
+    /**
+     * The constant HTTP_OK.
+     */
     public static final int HTTP_OK = 200;
 
+    /**
+     * The constant HTTP_NOT_FOUND.
+     */
     public static final int HTTP_NOT_FOUND = 404;
 }
