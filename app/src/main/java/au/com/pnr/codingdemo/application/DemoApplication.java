@@ -2,8 +2,10 @@ package au.com.pnr.codingdemo.application;
 
 import android.app.Application;
 import au.com.pnr.codingdemo.BuildConfig;
-import au.com.pnr.codingdemo.restclient.ApiFactory;
-import au.com.pnr.codingdemo.restclient.interfaces.ApiService;
+import au.com.pnr.codingdemo.di.DaggerDemoAppComponent;
+import au.com.pnr.codingdemo.di.DemoAppComponent;
+import au.com.pnr.codingdemo.util.NetworkUtil;
+import au.com.pnr.codingdemo.util.UIUtility;
 import timber.log.Timber;
 
 /**
@@ -11,7 +13,7 @@ import timber.log.Timber;
  */
 public class DemoApplication extends Application {
 
-    private static ApiService apiService;
+    private static DemoAppComponent demoAppComponent;
 
     @Override
     public void onCreate() {
@@ -20,17 +22,19 @@ public class DemoApplication extends Application {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
+        demoAppComponent = DaggerDemoAppComponent.builder()
+                .demoApplicationModule(new DemoApplicationModule(this))
+                .networkUtil(new NetworkUtil())
+                .uIUtility(new UIUtility())
+                .build();
     }
 
     /**
-     * Gets api service.
+     * Gets demo app component.
      *
-     * @return the api service
+     * @return the demo app component
      */
-    public static ApiService getApiService() {
-        if (apiService == null) {
-            apiService = ApiFactory.create();
-        }
-        return apiService;
+    public static DemoAppComponent getDemoAppComponent() {
+        return demoAppComponent;
     }
 }

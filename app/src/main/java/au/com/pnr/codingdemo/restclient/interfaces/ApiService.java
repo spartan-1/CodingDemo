@@ -2,7 +2,7 @@ package au.com.pnr.codingdemo.restclient.interfaces;
 
 import au.com.pnr.codingdemo.model.CountryInfo;
 import au.com.pnr.codingdemo.restclient.util.Constants;
-import retrofit2.Call;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 
 /**
@@ -15,5 +15,5 @@ public interface ApiService {
      * @return the country info
      */
     @GET(Constants.INFO_FEED)
-    Call<CountryInfo> getCountryInfo();
+    Observable<CountryInfo> getCountryInfo();
 }
