@@ -16,13 +16,12 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(AndroidJUnit4.class)
 public class ContextTest {
+
     /**
      * Use app context.
-     *
-     * @throws Exception the exception
      */
     @Test
-    public void useAppContext() throws Exception {
+    public void useAppContext() {
         // Context of the app under test.
         Context appContext = ApplicationProvider.getApplicationContext();
 

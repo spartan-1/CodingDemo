@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class CountryInfoAdapter extends RecyclerView.Adapter<InformationViewHolder> {
 
-    private List<InformationData> informationDataList;
+    private final List<InformationData> informationDataList;
 
     /**
      * Instantiates a new Country info adapter.

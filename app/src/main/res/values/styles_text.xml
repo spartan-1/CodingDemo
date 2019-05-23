@@ -3,11 +3,6 @@
     <style name="Text">
         <item name="android:textSize">@dimen/text_base</item>
     </style>
-
-    <style name="Text.Small">
-        <item name="android:textSize">@dimen/text_small</item>
-    </style>
-
     <style name="Text.Large">
         <item name="android:textSize">@dimen/text_large</item>
     </style>

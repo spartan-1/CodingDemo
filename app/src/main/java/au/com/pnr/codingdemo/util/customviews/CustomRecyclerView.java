@@ -11,18 +11,12 @@ import au.com.pnr.codingdemo.util.AppConstants;
 public class CustomRecyclerView extends RecyclerView {
 
     /**
-     * The Context.
-     */
-    Context context;
-
-    /**
      * Instantiates a new Custom recycler view.
      *
      * @param context the context
      */
     public CustomRecyclerView(Context context) {
         super(context);
-        this.context = context;
     }
 
     /**

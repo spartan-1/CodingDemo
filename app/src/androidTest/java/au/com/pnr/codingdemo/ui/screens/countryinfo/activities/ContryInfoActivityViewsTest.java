@@ -27,56 +27,44 @@ public class ContryInfoActivityViewsTest {
 
     /**
      * Sets up.
-     *
-     * @throws Exception the exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         countryInfoActivity = countryInfoActivityActivityTestRule.getActivity();
     }
 
     /**
      * Test launch.
-     *
-     * @throws Exception the exception
      */
     @Test
-    public void testLaunch() throws Exception {
+    public void testLaunch() {
         View view = countryInfoActivity.findViewById(R.id.activity_country_info_constraint_layout);
         assertNotNull(view);
     }
 
     /**
      * Test tool bar.
-     *
-     * @throws Exception the exception
      */
     @Test
-    public void testToolBar() throws Exception {
+    public void testToolBar() {
         View view = countryInfoActivity.findViewById(R.id.toolbar);
         assertNotNull(view);
-
     }
 
     /**
      * Test container.
-     *
-     * @throws Exception the exception
      */
     @Test
-    public void testContainer() throws Exception {
+    public void testContainer() {
         View view = countryInfoActivity.findViewById(R.id.content_layout);
         assertNotNull(view);
-
     }
 
     /**
      * Tear down.
-     *
-     * @throws Exception the exception
      */
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         countryInfoActivity = null;
     }
 }

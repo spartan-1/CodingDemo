@@ -59,9 +59,9 @@ public class CountryInfoListFragment extends BaseFragment {
     private CountryInfoAdapter countryInfoAdapter;
 
 
-    private Observer<CountryInfo> infoObserver = countryInfo -> {
+    private final Observer<CountryInfo> infoObserver = countryInfo -> {
         mRefreshFeed.setRefreshing(false);
-        if (countryInfo.getRows() != null && countryInfo.getRows().size() > 0) {
+        if (countryInfo != null && countryInfo.getRows() != null && countryInfo.getRows().size() > 0) {
             countryInfoAdapter.updateData(countryInfo.getRows());
             (Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())).setTitle(countryInfo.getTitle());
             showDataView();
@@ -69,7 +69,6 @@ public class CountryInfoListFragment extends BaseFragment {
             handleDataError();
         }
     };
-
 
     private void initRecyclerView() {
         countryInfoAdapter = new CountryInfoAdapter(new ArrayList<>());
@@ -91,14 +90,14 @@ public class CountryInfoListFragment extends BaseFragment {
         countryInfoViewModel = ViewModelProviders.of(this).get(CountryInfoViewModel.class);
         initRecyclerView();
         showProgressView();
-        countryInfoViewModel.getCountryInfo().observe(Objects.requireNonNull(getActivity()), infoObserver);
+        countryInfoViewModel.getCountryInfo(false).observe(Objects.requireNonNull(getActivity()), infoObserver);
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mRefreshFeed.setOnRefreshListener(() -> countryInfoViewModel.getCountryInfo());
+        mRefreshFeed.setOnRefreshListener(() -> countryInfoViewModel.getCountryInfo(true));
     }
 
     private void showProgressView() {

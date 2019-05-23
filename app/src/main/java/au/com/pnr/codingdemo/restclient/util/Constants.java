@@ -30,6 +30,12 @@ public class Constants {
      */
     public static final int API_WRITE_TIMEOUT_IN_SECONDS = 30;
 
+
+    /**
+     * The constant CACHE_SIZE.
+     */
+    public static final int CACHE_SIZE = 10 * 1024 * 1024;
+
     /**
      * The constant HTTP_OK.
      */
