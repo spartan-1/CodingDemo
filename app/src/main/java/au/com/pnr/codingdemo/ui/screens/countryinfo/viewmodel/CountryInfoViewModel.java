@@ -13,7 +13,7 @@ import au.com.pnr.codingdemo.restclient.webservices.CountryInfoWebService;
  */
 public class CountryInfoViewModel extends AndroidViewModel {
 
-    private final MutableLiveData<CountryInfo> countryInfoMutableLiveData;
+    private MutableLiveData<CountryInfo> countryInfoMutableLiveData;
 
     private final CountryInfoWebService countryInfoWebService;
 
@@ -25,7 +25,6 @@ public class CountryInfoViewModel extends AndroidViewModel {
     public CountryInfoViewModel(@NonNull Application application) {
         super(application);
         countryInfoWebService = new CountryInfoWebService();
-        countryInfoMutableLiveData = new MutableLiveData<>();
     }
 
     /**
@@ -33,8 +32,16 @@ public class CountryInfoViewModel extends AndroidViewModel {
      *
      * @return the country info
      */
-    public LiveData<CountryInfo> getCountryInfo() {
-        return countryInfoWebService.loadCountryInformation(countryInfoMutableLiveData);
+    public LiveData<CountryInfo> getCountryInfo(boolean refreshRequired) {
+        if (countryInfoMutableLiveData == null) {
+            countryInfoMutableLiveData = new MutableLiveData<>();
+            return countryInfoWebService.loadCountryInformation(countryInfoMutableLiveData);
+        } else if (refreshRequired) {
+            return countryInfoWebService.loadCountryInformation(countryInfoMutableLiveData);
+        } else {
+            countryInfoMutableLiveData.postValue(countryInfoMutableLiveData.getValue());
+            return countryInfoMutableLiveData;
+        }
     }
 
 }

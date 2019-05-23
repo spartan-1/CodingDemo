@@ -36,4 +36,12 @@ public interface DemoAppComponent {
      * @param uiUtility the ui utility
      */
     void inject(UIUtility uiUtility);
+
+
+    /**
+     * Inject.
+     *
+     * @param apiFactory the api factory
+     */
+    void inject(ApiFactory apiFactory);
 }
