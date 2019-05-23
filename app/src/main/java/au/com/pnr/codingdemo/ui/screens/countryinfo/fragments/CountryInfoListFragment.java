@@ -59,7 +59,7 @@ public class CountryInfoListFragment extends BaseFragment {
     private CountryInfoAdapter countryInfoAdapter;
 
 
-    private Observer<CountryInfo> infoObserver = countryInfo -> {
+    private final Observer<CountryInfo> infoObserver = countryInfo -> {
         mRefreshFeed.setRefreshing(false);
         if (countryInfo.getRows() != null && countryInfo.getRows().size() > 0) {
             countryInfoAdapter.updateData(countryInfo.getRows());

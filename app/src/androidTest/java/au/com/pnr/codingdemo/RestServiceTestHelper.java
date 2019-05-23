@@ -17,7 +17,7 @@ public class RestServiceTestHelper {
      * @return the string
      * @throws Exception the exception
      */
-    public static String convertStreamToString(InputStream inputStream) throws Exception {
+    private static String convertStreamToString(InputStream inputStream) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder stringBuilder = new StringBuilder();
         String line;

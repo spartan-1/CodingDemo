@@ -14,7 +14,7 @@ public class DemoApplicationModule {
     /**
      * The Demo application.
      */
-    DemoApplication demoApplication;
+    private final DemoApplication demoApplication;
 
     /**
      * Instantiates a new Demo application module.

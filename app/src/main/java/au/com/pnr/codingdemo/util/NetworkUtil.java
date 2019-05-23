@@ -3,8 +3,6 @@ package au.com.pnr.codingdemo.util;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.widget.Toast;
-import au.com.pnr.codingdemo.R;
 import au.com.pnr.codingdemo.application.DemoApplication;
 import dagger.Module;
 import dagger.Provides;
@@ -20,7 +18,7 @@ public class NetworkUtil {
 
     @Provides
     @Singleton
-    NetworkUtil providesNetworkUtility(){
+    NetworkUtil providesNetworkUtility() {
         return new NetworkUtil();
     }
 

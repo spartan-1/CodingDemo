@@ -13,9 +13,9 @@ import au.com.pnr.codingdemo.restclient.webservices.CountryInfoWebService;
  */
 public class CountryInfoViewModel extends AndroidViewModel {
 
-    private MutableLiveData<CountryInfo> countryInfoMutableLiveData;
+    private final MutableLiveData<CountryInfo> countryInfoMutableLiveData;
 
-    private CountryInfoWebService countryInfoWebService;
+    private final CountryInfoWebService countryInfoWebService;
 
     /**
      * Instantiates a new Country info view model.
